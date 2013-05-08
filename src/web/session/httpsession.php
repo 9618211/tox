@@ -36,7 +36,7 @@ class HttpSession extends Core\Assembly implements Web\IHttpSession
     public function __construct()
     {
         if (session_id() != '') {
-            throw new \Tox\Web\SessionAlreadyStartException(array('session_id' => session_id()));
+            throw new SessionAlreadyStartException(array('session_id' => session_id()));
         }
     }
 
@@ -176,7 +176,7 @@ class HttpSession extends Core\Assembly implements Web\IHttpSession
             session_save_path($value);
         }
         else{
-            throw new \Tox\Web\SessionSavePathNotVaildException(array('savePath' => $value));
+            throw new SessionSavePathNotVaildException(array('savePath' => $value));
         }
     }
 

@@ -26,8 +26,9 @@ namespace Tox\Web\Session;
 use PHPUnit_Framework_TestCase;
 
 require_once __DIR__ . '/../../../../src/core/exception.php';
-require_once __DIR__ . '/../../../../src/web/@exception/sessionsavepathnotvaild.php';
-require_once __DIR__ . '/../../../../src/web/@exception/sessionalreadystart.php';
+
+require_once __DIR__ . '/../../../../src/web/session/sessionsavepathnotvaildexception.php';
+require_once __DIR__ . '/../../../../src/web/session/sessionalreadystartexception.php';
 
 require_once __DIR__ . '/../../../../src/core/assembly.php';
 require_once __DIR__ . '/../../../../src/web/ihttpsession.php';
@@ -97,7 +98,7 @@ class HttpSessionTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Tox\Web\SessionSavePathNotVaildException
+     * @expectedException Tox\Web\Session\SessionSavePathNotVaildException
      */
     public function testSetSavePathException()
     {
@@ -106,7 +107,7 @@ class HttpSessionTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Tox\Web\SessionAlreadyStartException
+     * @expectedException Tox\Web\Session\SessionAlreadyStartException
      */
     public function testSessionAlreadyStartException()
     {
