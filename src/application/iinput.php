@@ -17,13 +17,14 @@
  * You should have received a copy of the GNU General Public License
  * along with Tox.  If not, see <http://www.gnu.org/licenses/>.
  *
- * @copyright © 2012-2013 SZen.in
+ * @copyright © 2012-2013 PHP-Tox.org
  * @license   GNU General Public License, version 3
  */
 
 namespace Tox\Application;
 
 use ArrayAccess;
+use Tox;
 
 /**
  * Announces the essential behaviors of applications input.
@@ -47,7 +48,7 @@ interface IInput extends ArrayAccess
      * @param  IToken $token Routing token containing the options and values.
      * @return self
      */
-    public function recruit(IToken $token);
+    public function recruit(Tox\Application\IToken $token);
 }
 
 // vi:ft=php fenc=utf-8 ff=unix ts=4 sts=4 et sw=4 fen fdm=indent fdl=1 tw=120

@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU General Public License
  * along with Tox.  If not, see <http://www.gnu.org/licenses/>.
  *
- * @copyright © 2012-2013 SZen.in
+ * @copyright © 2012-2013 PHP-Tox.org
  * @license   GNU General Public License, version 3
  */
 
@@ -32,9 +32,9 @@ require_once __DIR__ . '/../../../../src/web/iresponse.php';
 require_once __DIR__ . '/../../../../src/web/response/response.php';
 
 require_once __DIR__ . '/../../../../src/core/exception.php';
-require_once __DIR__ . '/../../../../src/application/output/@exception/closedoutput.php';
-require_once __DIR__ . '/../../../../src/web/response/@exception/headersreadonly.php';
-require_once __DIR__ . '/../../../../src/web/response/@exception/illegalhttpstatuscode.php';
+require_once __DIR__ . '/../../../../src/application/output/closedoutputexception.php';
+require_once __DIR__ . '/../../../../src/web/response/headersreadonlyexception.php';
+require_once __DIR__ . '/../../../../src/web/response/illegalhttpstatuscodeexception.php';
 
 require_once __DIR__ . '/../../../../src/application/ioutputtask.php';
 require_once __DIR__ . '/../../../../src/web/ihttpheadersprocessor.php';

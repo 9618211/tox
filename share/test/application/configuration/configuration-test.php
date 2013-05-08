@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU General Public License
  * along with Tox.  If not, see <http://www.gnu.org/licenses/>.
  *
- * @copyright © 2012-2013 SZen.in
+ * @copyright © 2012-2013 PHP-Tox.org
  * @license   GNU General Public License, version 3
  */
 
@@ -43,8 +43,8 @@ require_once __DIR__ . '/../../../../src/core/assembly.php';
 require_once __DIR__ . '/../../../../src/core/exception.php';
 require_once __DIR__ . '/../../../../src/application/iconfiguration.php';
 require_once __DIR__ . '/../../../../src/application/configuration/configuration.php';
-require_once __DIR__ . '/../../../../src/application/configuration/@exception/invalidconfigurationfile.php';
-require_once __DIR__ . '/../../../../src/application/configuration/@exception/invalidconfigurationitems.php';
+require_once __DIR__ . '/../../../../src/application/configuration/invalidconfigurationfileexception.php';
+require_once __DIR__ . '/../../../../src/application/configuration/invalidconfigurationitemsexception.php';
 
 require_once __DIR__ . '/../../../../src/application/application.php';
 
@@ -218,6 +218,8 @@ class ConfigurationTest extends PHPUnit_Framework_TestCase
 
         $o_configuration->set('domain', 'google.com');
         $o_configuration->set('package-name', 'com.google.android');
+
+        $this->assertTrue(isset($o_configuration['domain']));
         $this->assertEquals('google.com', $o_configuration['domain']);
         $this->assertEquals('com.google.android', $o_configuration['package-name']);
 
@@ -320,6 +322,15 @@ class ConfigurationTest extends PHPUnit_Framework_TestCase
         $this->assertTrue(array_key_exists('imported', $o_dump));
         $this->assertTrue(array_key_exists('loaded', $o_dump));
         $this->assertTrue(array_key_exists('seted', $o_dump));
+    }
+
+    public function testInvalidFileCanNotBeAssembled()
+    {
+        $o_configuration = $this->getMockBuilder('Tox\\Application\\Configuration\\Configuration')
+            ->setMethods(array('abc'))
+            ->disableOriginalConstructor()
+            ->getMock();
+        $this->assertFalse($o_configuration->getPath('/etc/conf.php'));
     }
 
     public function invalidConfigurationFile()

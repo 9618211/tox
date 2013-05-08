@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU General Public License
  * along with Tox.  If not, see <http://www.gnu.org/licenses/>.
  *
- * @copyright © 2012-2013 SZen.in
+ * @copyright © 2012-2013 PHP-Tox.org
  * @license   GNU General Public License, version 3
  */
 
@@ -31,7 +31,7 @@ require_once __DIR__ . '/../../../../src/web/ipagecacheagent.php';
 require_once __DIR__ . '/../../../../src/web/response/pagecacheagent.php';
 
 require_once __DIR__ . '/../../../../src/core/exception.php';
-require_once __DIR__ . '/../../../../src/web/response/@exception/responserequired.php';
+require_once __DIR__ . '/../../../../src/web/response/responserequiredexception.php';
 
 require_once __DIR__ . '/../../../../src/application/ioutput.php';
 require_once __DIR__ . '/../../../../src/application/output/output.php';

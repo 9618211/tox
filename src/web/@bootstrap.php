@@ -19,10 +19,11 @@
  *
  * @package   tox.web
  * @author    Snakevil Zen <zsnakevil@gmail.com>
- * @copyright © 2012-2013 SZen.in
+ * @copyright © 2012-2013 PHP-Tox.org
  * @license   GNU General Public License, version 3
  */
 
 Tox::alias('Tox\\Web\\Response\\Response', 'Tox\\Web\\Response');
+Tox::alias('Tox\\Web\\Request\\Request', 'Tox\\Web\\Request');
 
 // vi:ft=php fenc=utf-8 ff=unix ts=4 sts=4 et sw=4 fen fdm=indent fdl=1 tw=120

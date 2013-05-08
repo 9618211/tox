@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU General Public License
  * along with Tox.  If not, see <http://www.gnu.org/licenses/>.
  *
- * @copyright © 2012-2013 SZen.in
+ * @copyright © 2012-2013 PHP-Tox.org
  * @license   GNU General Public License, version 3
  */
 
@@ -29,7 +29,7 @@ require_once __DIR__ . '/../../../src/core/assembly.php';
 require_once __DIR__ . '/../../../src/core/classmanager.php';
 
 require_once __DIR__ . '/../../../src/core/exception.php';
-require_once __DIR__ . '/../../../src/core/@exception/existantclasstoalias.php';
+require_once __DIR__ . '/../../../src/core/existantclasstoaliasexception.php';
 
 /**
  * Tests Tox\Core\ClassManager.

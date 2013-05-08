@@ -11,7 +11,6 @@
 0x80010002 = VariableReTeeingException
 
 [Tox\Application]
-;0x800200??
 0x80020001 = MultipleApplicationRuntimeException
 0x80020002 = InvalidConfiguredFallbackTypeException
 0x80020003 = InvalidConfiguredOutputTypeException
@@ -20,6 +19,7 @@
 
 [Tox\Application\Input]
 ;0x800201??
+0x80020101 = UnknownTypeException
 
 [Tox\Application\Output]
 0x80020201 = ClosedOutputException
@@ -27,7 +27,6 @@
 0x80020203 = BufferReadonlyException
 
 [Tox\Application\Configuration]
-;0x800203??
 0x80020301 = InvalidConfigurationFileException
 0x80020302 = InvalidConfigurationFileException
 
@@ -42,21 +41,34 @@
 ;0x800206??
 
 [Tox\Application\Model]
-;0x800207??
+0x80020701 = IdentifierReadOnlyException
+0x80020702 = NonExistantEntityException
+0x80020703 = PreparationCanNotResetException
+0x80020704 = DuplicateIdentifierException
+0x80020705 = IllegalFilterException
+0x80020706 = AttributeFilteredException
+0x80020707 = AttributeSortedException
+0x80020708 = IllegalSetElementException
+0x80020709 = IllegalEntityForSetException
+0x8002070A = ModelIncludedInSetException
+0x8002070B = PreparedModelToDropException
+0x8002070C = SetPropertyUnreplacableException
+0x8002070D = SetWithoutFiltersException
 
 [Tox\Application\Dao]
-;0x800208??
 0x80020801 = DataSourceExpectedException
 0x80020802 = InvalidCachingDataDomainException
+0x80020803 = DismatchedStatementException
 
 [Tox\Application\Type]
 ;0x800209??
+0x80020901 = UnexpectedTypeException
 
 [Tox\Web]
 ;0x800300??
 
 [Tox\Web\Request]
-;0x800301??
+0x80030101 = UnknownMetaException
 
 [Tox\Web\Response]
 0x80030201 = ResponseRequiredException
@@ -67,7 +79,20 @@
 ;0x800400??
 
 [Tox\Data\Pdo]
-;0x800401??
+0x80040101 = NestedTransactionUnsupportedException
+0x80040102 = NoActiveTransactionException
+0x80040103 = DismatchedStatementException
+0x80040104 = ClosedStatementException
+0x80040105 = ExecutingFailureException
+0x80040106 = ColumnBindingFailureException
+0x80040107 = ParamBindingFailureException
+0x80040108 = ValueBindingFailureException
+0x80040109 = CursorClosingFailureException
+0x8004010A = RowsetIteratingFailureException
+0x8004010B = AttributeSettingFailureException
+0x8004010C = FetchModeSettingFailureException
+0x8004010D = ExecutedStatementException
+0x8004010E = ClusterOopsException
 
 [Tox\Data\Kv]
 0x80040201 = EmptyHostException
