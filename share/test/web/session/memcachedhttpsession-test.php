@@ -25,31 +25,32 @@ namespace Tox\Web;
 
 use PHPUnit_Framework_TestCase;
 
-require_once __DIR__ . '/../../../src/core/assembly.php';
-require_once __DIR__ . '/../../../src/core/exception.php';
-require_once __DIR__ . '/../../../src/web/@exception/sessionsavepathnotvaild.php';
-require_once __DIR__ . '/../../../src/web/@exception/sessionalreadystart.php';
+require_once __DIR__ . '/../../../../src/core/assembly.php';
+require_once __DIR__ . '/../../../../src/core/exception.php';
+
+require_once __DIR__ . '/../../../../src/web/session/sessionsavepathnotvaildexception.php';
+require_once __DIR__ . '/../../../../src/web/session/sessionalreadystartexception.php';
 
 
-require_once __DIR__ . '/../../../src/data/isource.php';
-require_once __DIR__ . '/../../../src/data/ikv.php';
-require_once __DIR__ . '/../../../src/data/kv/kv.php';
-require_once __DIR__ . '/../../../src/data/kv/memcacheserverconfiguration.php';
-require_once __DIR__ . '/../../../src/data/kv/@exception/memcachevaluenotstring.php';
-require_once __DIR__ . '/../../../src/data/kv/@exception/memcachekeytoolong.php';
-require_once __DIR__ . '/../../../src/data/kv/@exception/emptyhost.php';
-require_once __DIR__ . '/../../../src/data/kv/@exception/memcacheconfignotarray.php';
-require_once __DIR__ . '/../../../src/data/kv/memcache.php';
+require_once __DIR__ . '/../../../../src/data/isource.php';
+require_once __DIR__ . '/../../../../src/data/ikv.php';
+require_once __DIR__ . '/../../../../src/data/kv/kv.php';
+require_once __DIR__ . '/../../../../src/data/kv/memcacheserverconfiguration.php';
+require_once __DIR__ . '/../../../../src/data/kv/memcachevaluenotstringexception.php';
+require_once __DIR__ . '/../../../../src/data/kv/memcachekeytoolongexception.php';
+require_once __DIR__ . '/../../../../src/data/kv/emptyhostexception.php';
+require_once __DIR__ . '/../../../../src/data/kv/memcacheconfignotarrayexception.php';
+require_once __DIR__ . '/../../../../src/data/kv/memcache.php';
 
 
 
-require_once __DIR__ . '/../../../src/web/ihttpsession.php';
-require_once __DIR__ . '/../../../src/web/ihttpsession.php';
-require_once __DIR__ . '/../../../src/web/httpsession.php';
-require_once __DIR__ . '/../../../src/web/memcachedhttpsession.php';
+require_once __DIR__ . '/../../../../src/web/ihttpsession.php';
+require_once __DIR__ . '/../../../../src/web/session/httpsession.php';
+require_once __DIR__ . '/../../../../src/web/session/memcachedhttpsession.php';
 
 use Tox\Web;
 use Tox;
+use Tox\Web\Session;
 
 /**
  * Tests Tox\Data\KV.
@@ -74,7 +75,7 @@ class MemcachedHttpSessionTest extends PHPUnit_Framework_TestCase
      */
     public function testNotExitInHypervariableWhenSet($config)
     {
-        $o_session = new Tox\Web\MemcachedHttpSession();
+        $o_session = new Session\MemcachedHttpSession();
         $o_session->init($config);
         $this->assertEmpty($o_session->Export());
         $o_session->setSession('foo', 'value');
@@ -96,7 +97,7 @@ class MemcachedHttpSessionTest extends PHPUnit_Framework_TestCase
                 ->method('set')
                 ->will($this->returnValue(true));
 
-        $mocksession = $this->getMockBuilder('Tox\\Web\\MemcachedHttpSession')
+        $mocksession = $this->getMockBuilder('Tox\\Web\\Session\\MemcachedHttpSession')
                 ->setMethods(array('newMemcache', 'useMemcachedStoreSession'))
                 ->getMockForAbstractClass();
 

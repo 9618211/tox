@@ -1,6 +1,6 @@
 <?php
 /**
- * Defines the test case for Tox\Web\HttpSession.
+ * Defines the test case for Session\HttpSession.
  *
  * This file is part of Tox.
  *
@@ -21,22 +21,23 @@
  * @license   GNU General Public License, version 3
  */
 
-namespace Tox\Web;
+namespace Tox\Web\Session;
 
 use PHPUnit_Framework_TestCase;
 
-require_once __DIR__ . '/../../../src/core/exception.php';
-require_once __DIR__ . '/../../../src/web/@exception/sessionsavepathnotvaild.php';
-require_once __DIR__ . '/../../../src/web/@exception/sessionalreadystart.php';
+require_once __DIR__ . '/../../../../src/core/exception.php';
 
-require_once __DIR__ . '/../../../src/core/assembly.php';
-require_once __DIR__ . '/../../../src/web/ihttpsession.php';
-require_once __DIR__ . '/../../../src/web/ihttpsession.php';
-require_once __DIR__ . '/../../../src/web/httpsession.php';
-require_once __DIR__ . '/../../../src/web/memcachedhttpsession.php';
+require_once __DIR__ . '/../../../../src/web/session/sessionsavepathnotvaildexception.php';
+require_once __DIR__ . '/../../../../src/web/session/sessionalreadystartexception.php';
+
+require_once __DIR__ . '/../../../../src/core/assembly.php';
+require_once __DIR__ . '/../../../../src/web/ihttpsession.php';
+require_once __DIR__ . '/../../../../src/web/session/httpsession.php';
+require_once __DIR__ . '/../../../../src/web/session/memcachedhttpsession.php';
 
 use Tox\Web;
 use Tox;
+use Tox\Web\Session;
 
 /**
  * Tests Tox\Data\KV.
@@ -58,7 +59,7 @@ class HttpSessionTest extends PHPUnit_Framework_TestCase
 
     public function testNotExitInHypervariableWhenSet()
     {
-        $o_session = new Tox\Web\HttpSession();
+        $o_session = new Session\HttpSession();
         $o_session->init(array());
         $this->assertEmpty($o_session->Export());
         $o_session->setSession('foo', 'value');
@@ -69,7 +70,7 @@ class HttpSessionTest extends PHPUnit_Framework_TestCase
 
     public function testSetAndGetSessionSavePath()
     {
-        $o_session = new Tox\Web\HttpSession();
+        $o_session = new Session\HttpSession();
         $o_session->setSavePath('/tmp');
         $o_session->init(array());
         $o_session->setSession('foo', 'value');
@@ -79,7 +80,7 @@ class HttpSessionTest extends PHPUnit_Framework_TestCase
 
     public function testSetAndGetSessionTimeout()
     {
-        $o_session = new Tox\Web\HttpSession();
+        $o_session = new Session\HttpSession();
         $o_session->setTimeout(500);
         $o_session->init(array());
         $this->assertEquals(500, $o_session->getTimeout());
@@ -87,7 +88,7 @@ class HttpSessionTest extends PHPUnit_Framework_TestCase
 
     public function testSessionClose()
     {
-        $mockememcachedSession = $this->getMockBuilder('Tox\\Web\\HttpSession')
+        $mockememcachedSession = $this->getMockBuilder('Tox\\Web\\Session\\HttpSession')
                 ->setMethods(array('useMemcachedStoreSession'))
                 ->getMock();
         $mockememcachedSession->Expects($this->any())
@@ -97,21 +98,21 @@ class HttpSessionTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Tox\Web\SessionSavePathNotVaildException
+     * @expectedException Tox\Web\Session\SessionSavePathNotVaildException
      */
     public function testSetSavePathException()
     {
-        $o_session = new Tox\Web\HttpSession();
+        $o_session = new Session\HttpSession();
         $o_session->setSavePath('ttt');
     }
 
     /**
-     * @expectedException Tox\Web\SessionAlreadyStartException
+     * @expectedException Tox\Web\Session\SessionAlreadyStartException
      */
     public function testSessionAlreadyStartException()
     {
         session_start();
-        $o_session = new Tox\Web\HttpSession();
+        $o_session = new Session\HttpSession();
     }
 
     public function testSetCookieParamsValueIsTrue()
@@ -128,7 +129,7 @@ class HttpSessionTest extends PHPUnit_Framework_TestCase
             'domain' => '',
             'secure' => false,
         );
-        $o_session = new Tox\Web\HttpSession();
+        $o_session = new Session\HttpSession();
         $o_session->init(array());
         $o_session->setCookieParams($arrayParams);
 
@@ -138,7 +139,7 @@ class HttpSessionTest extends PHPUnit_Framework_TestCase
 
     public function testGetSessionID()
     {
-        $o_session = new Tox\Web\HttpSession();
+        $o_session = new Session\HttpSession();
         $o_session->init(array());
         $t = $o_session->getSessionID();
         $this->assertNotEmpty($t);
@@ -149,7 +150,7 @@ class HttpSessionTest extends PHPUnit_Framework_TestCase
 
     public function testGetSessionAfterSet()
     {
-        $o_session = new Tox\Web\HttpSession();
+        $o_session = new Session\HttpSession();
         $o_session->init(array());
         $o_session->setSession('foo', 'value');
         $this->assertEquals('value', $o_session->getSession('foo'));
@@ -157,7 +158,7 @@ class HttpSessionTest extends PHPUnit_Framework_TestCase
 
     public function testEmptyAfterDestory()
     {
-        $o_session = new Tox\Web\HttpSession();
+        $o_session = new Session\HttpSession();
         $o_session->init(array());
         $o_session->setSession('foo', 'value');
         $o_session->destroy();
@@ -166,7 +167,7 @@ class HttpSessionTest extends PHPUnit_Framework_TestCase
 
     public function testEmptyAfterRemoveFromSession()
     {
-        $o_session = new Tox\Web\HttpSession();
+        $o_session = new Session\HttpSession();
         $o_session->init(array());
         $o_session->setSession('foo', 'value');
         $this->assertEquals('value', $o_session->getSession('foo'));
@@ -179,7 +180,7 @@ class HttpSessionTest extends PHPUnit_Framework_TestCase
 
     public function testEmptyAfterClearSession()
     {
-        $o_session = new Tox\Web\HttpSession();
+        $o_session = new Session\HttpSession();
         $o_session->init(array());
         $o_session->setSession('foo', 'value');
 
@@ -190,7 +191,7 @@ class HttpSessionTest extends PHPUnit_Framework_TestCase
 
     public function testSessionHanderFunction()
     {
-        $o_session = new Tox\Web\HttpSession();
+        $o_session = new Session\HttpSession();
         $o_session->init(array());
         $this->assertTrue($o_session->openSession('/tmp', session_name()));
         $this->assertTrue($o_session->closeSession());
@@ -202,7 +203,7 @@ class HttpSessionTest extends PHPUnit_Framework_TestCase
 
     public function testExportSession()
     {
-        $o_session = new Tox\Web\HttpSession();
+        $o_session = new Session\HttpSession();
         $o_session->init(array());
         $o_session->setSession('foo', 'value');
 
@@ -211,7 +212,7 @@ class HttpSessionTest extends PHPUnit_Framework_TestCase
 
     public function testOffSetAndOffGet()
     {
-        $o_session = new Tox\Web\HttpSession();
+        $o_session = new Session\HttpSession();
         $o_session->init(array());
         $o_session['foo'] = 'val';
         $this->assertEquals('val', $o_session['foo']);
@@ -219,7 +220,7 @@ class HttpSessionTest extends PHPUnit_Framework_TestCase
 
     public function testOffSetExists()
     {
-        $o_session = new Tox\Web\HttpSession();
+        $o_session = new Session\HttpSession();
         $o_session->init(array());
         $o_session['foo'] = 'val';
         $this->assertTrue(isset($o_session['foo']));
@@ -227,7 +228,7 @@ class HttpSessionTest extends PHPUnit_Framework_TestCase
 
     public function testOffSetUnset()
     {
-        $o_session = new Tox\Web\HttpSession();
+        $o_session = new Session\HttpSession();
         $o_session->init(array());
         $o_session['foo'] = 'val';
         unset($o_session['foo']);

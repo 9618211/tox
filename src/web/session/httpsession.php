@@ -23,12 +23,13 @@
  * @license   http://www.gnu.org/licenses/gpl.html
  */
 
-namespace Tox\Web;
+namespace Tox\Web\Session;
 
 use Tox\Core;
+use Tox\Web;
 
 
-class HttpSession extends Core\Assembly implements IHttpSession
+class HttpSession extends Core\Assembly implements Web\IHttpSession
 {
     protected $sessionData;
 
