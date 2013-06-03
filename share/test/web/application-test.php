@@ -36,7 +36,7 @@ require_once __DIR__ . '/../../../src/application/invalidconfiguredinputtypeexce
 require_once __DIR__ . '/../../../src/application/invalidconfiguredoutputtypeexception.php';
 require_once __DIR__ . '/../../../src/application/invalidconfiguredroutertypeexception.php';
 require_once __DIR__ . '/../../../src/application/multipleapplicationruntimeexception.php';
-require_once __DIR__ . '/../../../src/web/@exception/invalidconfiguredsessiontype.php';
+require_once __DIR__ . '/../../../src/web/invalidconfiguredsessiontypeexception.php';
 
 require_once __DIR__ . '/../../../src/application/iinput.php';
 require_once __DIR__ . '/../../../src/application/ioutputtask.php';

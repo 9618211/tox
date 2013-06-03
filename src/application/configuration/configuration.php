@@ -79,6 +79,9 @@ class Configuration extends Core\Assembly implements Application\IConfiguration
      */
     public function __construct($path = '')
     {
+        if (!$path) {
+            return;
+        }
         $s_file = $this->getPath($path);
         if ($s_file) {
             require_once $s_file;
