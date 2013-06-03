@@ -23,7 +23,7 @@
  * @license   http://www.gnu.org/licenses/gpl.html
  */
 
-namespace Tox\Web;
+namespace Tox\Web\Session;
 
 use Tox\Data\KV;
 
