@@ -26,6 +26,8 @@ namespace Tox\Web\Session;
 use PHPUnit_Framework_TestCase;
 
 require_once __DIR__ . '/../../../../src/core/exception.php';
+require_once __DIR__ . '/../../../../src/web/sessionsavepathnotvaildexception.php';
+require_once __DIR__ . '/../../../../src/web/sessionalreadystartexception.php';
 
 require_once __DIR__ . '/../../../../src/web/session/sessionsavepathnotvaildexception.php';
 require_once __DIR__ . '/../../../../src/web/session/sessionalreadystartexception.php';
