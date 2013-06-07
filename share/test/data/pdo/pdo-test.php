@@ -445,6 +445,28 @@ class PdoTest extends PHPUnit_Framework_TestCase
         $this->pdoMock->setAttribute(array_rand($a_solid), microtime());
     }
 
+    /**
+     * @depends testLazyLoadingForExec
+     */
+    public function testExtraProcessForMysqlConnection()
+    {
+        $this->pdoMock = $this->getMock(
+            'Tox\\Data\\Pdo\\PdoStub',
+            array('newPHPPdo', 'newStatement'),
+            array('mysql:' . $this->dsn, $this->username, $this->password, $this->options),
+            'c' . sha1(microtime())
+        );
+        $s_sql = microtime();
+        $this->pdo->expects($this->at(0))->method('exec')
+            ->with($this->equalTo("SET NAMES 'utf8'"));
+        $this->pdo->expects($this->at(1))->method('exec')
+            ->with($this->equalTo($s_sql));
+        $this->pdoMock->expects($this->once())->method('newPHPPdo')
+            ->will($this->returnValue($this->pdo));
+        $this->pdoMock->exec($s_sql);
+        $this->assertTrue($this->pdoMock->isConnected());
+    }
+
     public function testRealizingForPrepare()
     {
         $s_sql = microtime();

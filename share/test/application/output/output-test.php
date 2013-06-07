@@ -36,6 +36,7 @@ require_once __DIR__ . '/../../../../src/application/output/streamingviewexpecte
 
 require_once __DIR__ . '/../../../../src/application/iview.php';
 require_once __DIR__ . '/../../../../src/application/istreamingview.php';
+require_once __DIR__ . '/../../../../src/application/ifallback.php';
 require_once __DIR__ . '/../../../../src/application/view/view.php';
 require_once __DIR__ . '/../../../../src/application/view/streamingview.php';
 require_once __DIR__ . '/../../../../src/application/ioutputtask.php';
@@ -109,6 +110,24 @@ class OutputTest extends PHPUnit_Framework_TestCase
         ob_start();
         $this->getMockForAbstractClass('Tox\\Application\\Output\\Output')->close()->write('foo');
         ob_end_clean();
+    }
+
+    /**
+     * @extends testOutputFrozenAfterClose
+     */
+    public function testFallbackOnClose()
+    {
+        $s_lob = microtime();
+        $o_view = $this->getMock('Tox\\Application\\IFallback');
+        $o_view->expects($this->once())->method('render')
+            ->will($this->returnValue($s_lob));
+        $o_out = $this->getMockForAbstractClass('Tox\\Application\\Output\\Output');
+        ob_start();
+        $o_out->close();
+        ob_end_clean();
+        ob_start();
+        $o_out->setView($o_view)->close();
+        $this->assertEquals($s_lob, ob_get_clean());
     }
 
     public function testOutputtingBufferReadableForTasks()
