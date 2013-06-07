@@ -185,6 +185,11 @@ class Pdo extends Core\Assembly implements Data\IPdo
     {
         if (!$this->isConnected()) {
             $this->pdo = $this->newPHPPdo();
+            switch (strstr($this->dsn, ':', true)) {
+                case 'mysql':
+                    $this->pdo->exec('SET NAMES \'utf8\'');
+                    break;
+            }
             if ($this->inTransaction) {
                 $this->pdo->beginTransaction();
             }

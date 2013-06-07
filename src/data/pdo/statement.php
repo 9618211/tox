@@ -539,6 +539,9 @@ abstract class Statement extends Core\Assembly implements Data\IPdoStatement
      */
     public function fetchAll($fetchStyle = null, $fetchArgument = null, $ctorArgs = array())
     {
+        if (null === $fetchArgument) {
+            return $this->readyToFetch()->fetchAll($fetchStyle);
+        }
         return $this->readyToFetch()->fetchAll($fetchStyle, $fetchArgument, $ctorArgs);
     }
 

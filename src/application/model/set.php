@@ -528,6 +528,7 @@ abstract class Set extends Core\Assembly implements Application\IModelSet
         foreach ($this->items as $ii => $jj) {
             $this->items[$ii] = call_user_func(array($this->getModelClass(), 'import'), $this, $this->getDao());
             $this->index[$this->items[$ii]->getId()] = $ii;
+            $this->cursor++;
         }
         $this->cursor = 0;
     }

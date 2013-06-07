@@ -155,6 +155,9 @@ abstract class Output extends Core\Assembly implements Application\IOutput
     public function setView(Application\IView $view)
     {
         $this->view = $view;
+        if ($view instanceof Application\IFallback) {
+            $this->closed = false;
+        }
         return $this;
     }
 
